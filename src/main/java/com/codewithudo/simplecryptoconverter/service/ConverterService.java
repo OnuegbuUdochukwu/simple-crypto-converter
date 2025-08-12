@@ -1,6 +1,7 @@
 package com.codewithudo.simplecryptoconverter.service;
 
 import com.codewithudo.simplecryptoconverter.dto.ConversionResult;
+import com.codewithudo.simplecryptoconverter.dto.MarketData;
 import com.codewithudo.simplecryptoconverter.dto.SingleTickerResponse;
 import com.codewithudo.simplecryptoconverter.dto.Ticker;
 import org.springframework.stereotype.Service;
@@ -56,12 +57,12 @@ public class ConverterService {
     }
 
     private Ticker getTickerForMarket(String market) {
-        String url = "https://app.quidax.com/api/v1/markets/" + market + "/ticker";
+        String url = "https://app.quidax.io/api/v1/markets/tickers/" + market;
         try {
             SingleTickerResponse response = restTemplate.getForObject(url, SingleTickerResponse.class);
             if (response != null && "success".equals(response.getStatus()) && response.getData() != null) {
                 return response.getData().getTicker();
-            }
+          }
         } catch (HttpClientErrorException.NotFound e) {
             // If the market is not found, the API returns a 404, which is expected.
             return null;
