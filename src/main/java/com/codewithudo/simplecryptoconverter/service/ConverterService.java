@@ -56,7 +56,7 @@ public class ConverterService {
     }
 
     private Ticker getTickerForMarket(String market) {
-        String url = "https://api.quidax.com/api/v1/markets/" + market + "/ticker";
+        String url = "https://app.quidax.com/api/v1/markets/" + market + "/ticker";
         try {
             SingleTickerResponse response = restTemplate.getForObject(url, SingleTickerResponse.class);
             if (response != null && "success".equals(response.getStatus()) && response.getData() != null) {
